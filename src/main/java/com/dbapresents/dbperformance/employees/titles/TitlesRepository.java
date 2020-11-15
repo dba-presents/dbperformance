@@ -10,6 +10,10 @@ import java.util.List;
 
 public interface TitlesRepository extends JpaRepository<Title, TitleCompositeKey> {
 
+    @Query("select t " +
+            "from titles t" +
+            "  join fetch t.employee " +
+            "where t.title = :title")
     List<Title> findByTitle(String title);
     List<Title> findByTitleAndToDateAfter(String title, LocalDate afterDate);
 

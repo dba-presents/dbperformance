@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @IdClass(TitleCompositeKey.class)
 public class Title {
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_no")
     private Employee employee;
 
