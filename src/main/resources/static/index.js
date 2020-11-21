@@ -4,16 +4,17 @@ function getManagerDescription(title) {
     return title.firstName + ' ' + title.lastName + ' ' + title.fromDate + ' - ' + title.toDate;
 }
 
-function getEmployeeDescription(employee) {
-    return employee.firstName + ' ' + employee.lastName + ' ' + employee.hireDate;
+function getEmployeeRow(employee) {
+    return '<td>' + employee.firstName + '</td><td>' + employee.lastName + '</td><td>' + employee.hireDate + '</td>';
 }
 
 function getRecentEmployees() {
     $.get("/api/employees/recent/")
         .done(function(employees) {
-            $('#getRecentEmployeesResult').html('Found: <ul>' +
-                employees.map(employee => '<li>' + getEmployeeDescription(employee) + '</li>').join('\n') +
-                '</ul>'
+            $('#getRecentEmployeesResult').html('Found: <table>' +
+                '<tr><th>First name</th><th>Last name</th><th>Hire date</th></tr>' +
+                employees.map(employee => '<tr>' + getEmployeeRow(employee) + '</tr>').join('\n') +
+                '</table>'
             );
         });
 }
