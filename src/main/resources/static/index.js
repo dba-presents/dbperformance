@@ -1,7 +1,7 @@
 'use strict';
 
 function getManagerDescription(title) {
-    return title.firstName + ' ' + title.lastName + ' ' + title.fromDate + ' - ' + title.toDate;
+    return '<td>' + title.firstName + '</td><td>' + title.lastName + '</td><td>' + title.fromDate + ' - ' + title.toDate + '</td>';
 }
 
 function getEmployeeRow(employee) {
@@ -22,9 +22,10 @@ function getRecentEmployees() {
 function getManagers() {
     $.get("/api/titles/manager/")
         .done(function(titles) {
-            $('#getManagersResult').html('Found: <ul>' +
-                titles.map(title => '<li>' + getManagerDescription(title) + '</li>').join('\n') +
-                '</ul>'
+            $('#getManagersResult').html('Found: <table>' +
+                '<tr><th>First name</th><th>Last name</th><th>Period of managerial position</th></tr>' +
+                titles.map(title => '<tr>' + getManagerDescription(title) + '</tr>').join('\n') +
+                '</table>'
             );
         });
 }
