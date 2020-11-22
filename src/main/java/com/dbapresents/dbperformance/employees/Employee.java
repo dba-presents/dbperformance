@@ -23,7 +23,7 @@ public class Employee {
     @Column(name = "hire_date")
     private LocalDate hireDate;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "emp_no")
     private List<Title> titles;
 }
