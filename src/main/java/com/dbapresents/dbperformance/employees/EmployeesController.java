@@ -3,6 +3,7 @@ package com.dbapresents.dbperformance.employees;
 import com.dbapresents.dbperformance.employees.salaries.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +28,7 @@ public class EmployeesController {
     @GetMapping(path = "/api/employees/recent/", produces= MediaType.APPLICATION_JSON_VALUE)
     public List<EmployeeDto> getRecentEmployees() {
         LocalDate hireDateFrom = LocalDate.of(1999, Month.JANUARY, 1);
-        return employeesRepository.findByHireDateAfterOrderByHireDateDesc(hireDateFrom).stream()
-                .limit(10)
+        return employeesRepository.findByHireDateAfterOrderByHireDateDesc(hireDateFrom, PageRequest.of(0, 10)).stream()
                 .map(employee -> EmployeeDto.builder()
                         .id(employee.getId())
                         .firstName(employee.getFirstName())
