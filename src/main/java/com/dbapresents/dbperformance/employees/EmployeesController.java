@@ -41,7 +41,7 @@ public class EmployeesController {
     @GetMapping(path = "/api/employees/since1990/count/", produces= MediaType.APPLICATION_JSON_VALUE)
     public long countEmployeesHiredSince1990() {
         LocalDate hireDateSince = LocalDate.of(1990, Month.JANUARY, 1);
-        return employeesRepository.findByHireDateAfter(hireDateSince).size();
+        return employeesRepository.countByHireDateAfter(hireDateSince);
     }
 
     @Transactional
