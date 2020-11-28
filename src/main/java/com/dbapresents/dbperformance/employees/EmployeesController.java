@@ -30,10 +30,10 @@ public class EmployeesController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(path = "/api/employees/from1990/count/", produces= MediaType.APPLICATION_JSON_VALUE)
-    public long countEmployeesHiredFrom1990() {
-        LocalDate hireDateFrom = LocalDate.of(1990, Month.JANUARY, 1);
-        return employeesRepository.findByHireDateAfter(hireDateFrom).size();
+    @GetMapping(path = "/api/employees/since1990/count/", produces= MediaType.APPLICATION_JSON_VALUE)
+    public long countEmployeesHiredSince1990() {
+        LocalDate hireDateSince = LocalDate.of(1990, Month.JANUARY, 1);
+        return employeesRepository.findByHireDateAfter(hireDateSince).size();
     }
 
 }

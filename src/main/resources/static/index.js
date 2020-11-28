@@ -31,7 +31,7 @@ function getManagers() {
 }
 
 function countEmployees() {
-    $.get("/api/employees/from1990/count/")
+    $.get("/api/employees/since1990/count/")
         .done(function (number) {
             $('#countEmployeesResult').html('Found ' + number + ' employees');
         })
