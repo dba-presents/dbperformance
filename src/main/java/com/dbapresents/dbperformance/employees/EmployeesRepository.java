@@ -9,6 +9,6 @@ public interface EmployeesRepository extends JpaRepository<Employee, Integer> {
 
     List<Employee> findByHireDateAfterOrderByHireDateDesc(LocalDate hireDateFrom);
 
-    List<Employee> findByHireDateAfter(LocalDate hireDateFrom);
+    long countByHireDateAfter(LocalDate hireDateFrom);
 
 }
