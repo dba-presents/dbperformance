@@ -30,9 +30,17 @@ function getManagers() {
         });
 }
 
+function countEmployees() {
+    $.get("/api/employees/from1990/count/")
+        .done(function (number) {
+            $('#countEmployeesResult').html('Found ' + number + ' employees');
+        })
+}
+
 function addLinkListeners() {
     $('#getRecentEmployeesLink').click(getRecentEmployees);
     $('#getManagersLink').click(getManagers);
+    $('#countEmployeesLink').click(countEmployees);
 }
 
 $( document ).ready(function() {
