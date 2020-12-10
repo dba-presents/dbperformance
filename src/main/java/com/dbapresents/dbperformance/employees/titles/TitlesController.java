@@ -36,11 +36,7 @@ public class TitlesController {
 
     @PostMapping(path = "/api/title/{titleToLayoff}/groupLayoff/")
     public void groupLayoff(@PathVariable String titleToLayoff) {
-        List<Title> titles = titlesRepository.findByTitleAndToDateAfter(titleToLayoff, LocalDate.now());
-        titles.forEach(
-                title -> title.setToDate(LocalDate.now())
-        );
-        titlesRepository.saveAll(titles);
+        titlesRepository.updateToDate(titleToLayoff, LocalDate.now().plus(1, ChronoUnit.DAYS), LocalDate.now());
     }
 
     @PostMapping(path = "/api/title/{titleToHireBack}/hireBack/")
