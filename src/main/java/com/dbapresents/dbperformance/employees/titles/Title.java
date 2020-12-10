@@ -2,12 +2,14 @@ package com.dbapresents.dbperformance.employees.titles;
 
 import com.dbapresents.dbperformance.employees.Employee;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @Entity(name = "titles")
 @IdClass(TitleCompositeKey.class)
 public class Title {
@@ -29,7 +31,7 @@ public class Title {
 }
 
 class TitleCompositeKey implements Serializable {
-    private Employee employee;
+    private Integer employee;
     private String title;
     private LocalDate fromDate;
 }

@@ -19,6 +19,30 @@
 
     <a id="countEmployeesLink" href="#">count employees hired since 1990</a>
     <div id="countEmployeesResult"></div>
+
+    <div>
+        <h2>Group layoffs</h2>
+        <div class="control-line">
+            <span class="control">Title</span>
+            <select class="control" id="titleToLayoffSelect">
+                <option value="Assistant Engineer">Assistant Engineer</option>
+                <option value="Manager">Manager</option>
+                <option value="Technique Leader">Technique Leader</option>
+                <option value="Staff">Staff</option>
+                <option value="Engineer">Engineer</option>
+                <option value="Senior Staff">Senior Staff</option>
+                <option value="Senior Engineer">Senior Engineer</option>
+            </select>
+        </div>
+        <div class="control-line">
+            <button class="control" id="layoffBtn">Layoff</button>
+            <div class="control" id="layoffResult" style="display: none">Done.</div>
+        </div>
+        <div class="control-line">
+            <button class="control" id="hireBackBtn">Hire back</button>
+            <div class="control" id="hireBackResult" style="display: none">Done.</div>
+        </div>
+    </div>
 </div>
 
 </body>

@@ -37,10 +37,28 @@ function countEmployees() {
         })
 }
 
+function groupLayoff() {
+    const title = $('#titleToLayoffSelect').val();
+    $.post("/api/title/" + title + "/groupLayoff/")
+        .done(function () {
+            $('#layoffResult').show();
+        })
+}
+
+function hireBack() {
+    const title = $('#titleToLayoffSelect').val();
+    $.post("/api/title/" + title + "/hireBack/")
+        .done(function () {
+            $('#hireBackResult').show();
+        })
+}
+
 function addLinkListeners() {
     $('#getRecentEmployeesLink').click(getRecentEmployees);
     $('#getManagersLink').click(getManagers);
     $('#countEmployeesLink').click(countEmployees);
+    $('#layoffBtn').click(groupLayoff);
+    $('#hireBackBtn').click(hireBack);
 }
 
 $( document ).ready(function() {

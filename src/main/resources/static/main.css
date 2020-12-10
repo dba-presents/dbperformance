@@ -5,3 +5,18 @@ table {
 th, td {
     border: 1px solid black;
 }
+
+.control-line {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.control-line > button {
+    float: left;
+}
+
+.control {
+    margin-left: 10px;
+    margin-right: 10px;
+}
