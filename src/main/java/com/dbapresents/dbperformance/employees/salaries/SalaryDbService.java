@@ -16,9 +16,10 @@ public class SalaryDbService {
         return entityManager.createQuery(
                 "select s " +
                         "from salaries s " +
-                        "where s.employee.id = " + empNo + " " +
+                        "where s.employee.id = :empNo " +
                         "order by s.fromDate",
                     Salary.class)
+                .setParameter("empNo", empNo)
                 .getResultList();
     }
 
