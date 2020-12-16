@@ -53,12 +53,31 @@ function hireBack() {
         })
 }
 
+function getSalaryHistory() {
+    $.get("/api/employees/recent/salaryhistory/")
+        .done(function(data) {
+            $('#salaryHistoryResult').html(
+                data.map(
+                    employee => getEmployeeSalariesDescription(employee)
+                ).join('\n')
+            );
+        });
+}
+
+function getEmployeeSalariesDescription(employee) {
+    return employee.firstName + ' ' + employee.lastName + '<table>' +
+        '<tr><th>From data</th><th>To date</th><th>Salary</th></tr>' +
+        employee.salaries.map(salary => '<tr><td>' + salary.fromDate + '</td><td>' + salary.toDate + '</td><td>' + salary.salary + '</td></tr>').join('\n') +
+        '</table>';
+}
+
 function addLinkListeners() {
     $('#getRecentEmployeesLink').click(getRecentEmployees);
     $('#getManagersLink').click(getManagers);
     $('#countEmployeesLink').click(countEmployees);
     $('#layoffBtn').click(groupLayoff);
     $('#hireBackBtn').click(hireBack);
+    $('#salaryHistoryBtn').click(getSalaryHistory);
 }
 
 $( document ).ready(function() {
