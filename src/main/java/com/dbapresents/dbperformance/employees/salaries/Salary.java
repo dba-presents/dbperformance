@@ -2,12 +2,14 @@ package com.dbapresents.dbperformance.employees.salaries;
 
 import com.dbapresents.dbperformance.employees.Employee;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @Entity(name = "salaries")
 @IdClass(SalaryCompositeKey.class)
 public class Salary {

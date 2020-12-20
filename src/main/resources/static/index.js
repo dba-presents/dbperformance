@@ -71,6 +71,13 @@ function getEmployeeSalariesDescription(employee) {
         '</table>';
 }
 
+function riseSalary() {
+    $.post("/api/employee/10076/salary/rise10p/")
+        .always(function () {
+            $('#salaryRiseResult').show();
+        })
+}
+
 function addLinkListeners() {
     $('#getRecentEmployeesLink').click(getRecentEmployees);
     $('#getManagersLink').click(getManagers);
@@ -78,6 +85,7 @@ function addLinkListeners() {
     $('#layoffBtn').click(groupLayoff);
     $('#hireBackBtn').click(hireBack);
     $('#salaryHistoryBtn').click(getSalaryHistory);
+    $('#salaryRiseBtn').click(riseSalary);
 }
 
 $( document ).ready(function() {
