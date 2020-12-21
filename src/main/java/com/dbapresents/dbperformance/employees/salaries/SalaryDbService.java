@@ -1,9 +1,13 @@
 package com.dbapresents.dbperformance.employees.salaries;
 
+import com.dbapresents.dbperformance.employees.Employee;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 @AllArgsConstructor
@@ -11,6 +15,7 @@ import java.util.List;
 public class SalaryDbService {
 
     private final EntityManager entityManager;
+    private final SalariesRepository salariesRepository;
 
     public List<Salary> getSalaryHistory(Integer empNo) {
         return entityManager.createQuery(
@@ -43,6 +48,27 @@ public class SalaryDbService {
                 .sum();
 
         return new CurrentSalaryDto((int) (sumOfSalaries / salaries.size()));
+    }
+
+    @Transactional
+    public void updateSalary(Employee employee, Salary currentSalary, Integer newSalaryValue) {
+        terminateCurrentSalary(currentSalary);
+        addNewSalary(employee, newSalaryValue);
+        throw new RuntimeException("Throw it just to avoid necessity to roll it back manually.");
+    }
+
+    private Salary terminateCurrentSalary(Salary currentSalary) {
+        currentSalary.setToDate(LocalDate.now());
+        return salariesRepository.saveAndFlush(currentSalary);
+    }
+
+    private void addNewSalary(Employee employee, Integer salary) {
+        Salary currentSalary = new Salary();
+        currentSalary.setEmployee(employee);
+        currentSalary.setSalary(salary);
+        currentSalary.setFromDate(LocalDate.now());
+        currentSalary.setToDate(LocalDate.of(9999, Month.JANUARY, 1));
+        salariesRepository.saveAndFlush(currentSalary);
     }
 
 }

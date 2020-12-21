@@ -44,17 +44,14 @@ public class EmployeesController {
         return employeesRepository.findByHireDateAfter(hireDateSince).size();
     }
 
-    @Transactional
     @PostMapping(path = "/api/employee/{empNo}/salary/rise10p/", produces= MediaType.APPLICATION_JSON_VALUE)
     public void riseSalary(@PathVariable Integer empNo) {
         Employee employee = employeesRepository.getOne(empNo);
         List<Salary> salaries = salariesRepository.findByEmployeeOrderByToDate(employee);
         Salary currentSalary = salaries.get(salaries.size() - 1);
-        currentSalary = terminateCurrentSalary(currentSalary);
         Integer newSalaryValue = calculateNewSalary(currentSalary);
-        addNewSalary(employee, newSalaryValue);
+        salaryDbService.updateSalary(employee, currentSalary, newSalaryValue);
         notifyAccountSystem(employee, newSalaryValue);
-        throw new RuntimeException("Throw it just to avoid necessity to roll it back manually.");
     }
 
     @GetMapping(path = "/api/employee/{empNo}/salary/", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -87,20 +84,6 @@ public class EmployeesController {
                         .toDate(salary.getToDate())
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    private Salary terminateCurrentSalary(Salary currentSalary) {
-        currentSalary.setToDate(LocalDate.now());
-        return salariesRepository.saveAndFlush(currentSalary);
-    }
-
-    private void addNewSalary(Employee employee, Integer salary) {
-        Salary currentSalary = new Salary();
-        currentSalary.setEmployee(employee);
-        currentSalary.setSalary(salary);
-        currentSalary.setFromDate(LocalDate.now());
-        currentSalary.setToDate(LocalDate.of(9999, Month.JANUARY, 1));
-        salariesRepository.saveAndFlush(currentSalary);
     }
 
     private Integer calculateNewSalary(Salary currentSalary) {
