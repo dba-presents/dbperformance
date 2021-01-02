@@ -78,6 +78,13 @@ function riseSalary() {
         })
 }
 
+function checkSalary() {
+    $.get("/api/employee/10076/salary/")
+        .always(function (salary) {
+            $('#salaryCheckResult').html("Current salary is " + salary.salary + ".");
+        })
+}
+
 function addLinkListeners() {
     $('#getRecentEmployeesLink').click(getRecentEmployees);
     $('#getManagersLink').click(getManagers);
@@ -85,6 +92,7 @@ function addLinkListeners() {
     $('#layoffBtn').click(groupLayoff);
     $('#hireBackBtn').click(hireBack);
     $('#salaryHistoryBtn').click(getSalaryHistory);
+    $('#salaryCheckBtn').click(checkSalary);
     $('#salaryRiseBtn').click(riseSalary);
 }
 

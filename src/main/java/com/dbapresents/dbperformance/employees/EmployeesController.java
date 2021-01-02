@@ -1,9 +1,6 @@
 package com.dbapresents.dbperformance.employees;
 
-import com.dbapresents.dbperformance.employees.salaries.SalariesRepository;
-import com.dbapresents.dbperformance.employees.salaries.Salary;
-import com.dbapresents.dbperformance.employees.salaries.SalaryDbService;
-import com.dbapresents.dbperformance.employees.salaries.SalaryDto;
+import com.dbapresents.dbperformance.employees.salaries.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -58,6 +55,15 @@ public class EmployeesController {
         addNewSalary(employee, newSalaryValue);
         notifyAccountSystem(employee, newSalaryValue);
         throw new RuntimeException("Throw it just to avoid necessity to roll it back manually.");
+    }
+
+    @GetMapping(path = "/api/employee/{empNo}/salary/", produces= MediaType.APPLICATION_JSON_VALUE)
+    public CurrentSalaryDto getCurrentSalary(@PathVariable Integer empNo) {
+        return salariesRepository.findCurrentSalary(empNo)
+                .map(salary -> CurrentSalaryDto.builder()
+                        .salary(salary.getSalary())
+                        .build())
+                .orElse(CurrentSalaryDto.builder().build());
     }
 
     @GetMapping(path = "/api/employees/recent/salaryhistory/", produces= MediaType.APPLICATION_JSON_VALUE)
