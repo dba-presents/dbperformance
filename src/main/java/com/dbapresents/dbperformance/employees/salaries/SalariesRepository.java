@@ -11,10 +11,10 @@ public interface SalariesRepository extends JpaRepository<Salary, SalaryComposit
 
     List<Salary> findByEmployeeOrderByToDate(Employee employee);
 
-    @Query("select s " +
+    @Query("select new com.dbapresents.dbperformance.employees.salaries.CurrentSalaryDto(s.salary) " +
             "from salaries s " +
             "where s.employee.id = :empNo " +
             "  and s.toDate = '9999-01-01'")
-    Optional<Salary> findCurrentSalary(int empNo);
+    Optional<CurrentSalaryDto> findCurrentSalary(int empNo);
 
 }
