@@ -60,9 +60,6 @@ public class EmployeesController {
     @GetMapping(path = "/api/employee/{empNo}/salary/", produces= MediaType.APPLICATION_JSON_VALUE)
     public CurrentSalaryDto getCurrentSalary(@PathVariable Integer empNo) {
         return salariesRepository.findCurrentSalary(empNo)
-                .map(salary -> CurrentSalaryDto.builder()
-                        .salary(salary.getSalary())
-                        .build())
                 .orElse(CurrentSalaryDto.builder().build());
     }
 
