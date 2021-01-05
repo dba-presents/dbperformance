@@ -1,5 +1,7 @@
 package com.dbapresents.dbperformance.employees.titles;
 
+import com.dbapresents.dbperformance.employees.salaries.CurrentSalaryDto;
+import com.dbapresents.dbperformance.employees.salaries.SalaryDbService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class TitlesController {
 
     private final TitlesRepository titlesRepository;
+    private final SalaryDbService salaryDbService;
 
     @GetMapping(path = "/api/titles/manager/", produces= MediaType.APPLICATION_JSON_VALUE)
     public List<ManagerDto> getManagers() {
@@ -43,6 +46,11 @@ public class TitlesController {
     @PostMapping(path = "/api/title/{titleToHireBack}/hireBack/")
     public void hireBack(@PathVariable String titleToHireBack) {
         titlesRepository.updateToDate(titleToHireBack, LocalDate.now().minus(20, ChronoUnit.DAYS), LocalDate.of(9999, Month.JANUARY, 1));
+    }
+
+    @GetMapping(path = "/api/titles/assistantengineer/avgsalary/", produces= MediaType.APPLICATION_JSON_VALUE)
+    public CurrentSalaryDto getAvgSalaryOfAssistantEngineer() {
+        return salaryDbService.getAvgSalaryOfAssistantEngineer();
     }
 
 }

@@ -85,6 +85,13 @@ function checkSalary() {
         })
 }
 
+function checkAvgSalary() {
+    $.get("/api/titles/assistantengineer/avgsalary/")
+        .always(function (salary) {
+            $('#salaryAvgCheckResult').html("Current average salary is " + salary.salary + ".");
+        })
+}
+
 function addLinkListeners() {
     $('#getRecentEmployeesLink').click(getRecentEmployees);
     $('#getManagersLink').click(getManagers);
@@ -94,6 +101,7 @@ function addLinkListeners() {
     $('#salaryHistoryBtn').click(getSalaryHistory);
     $('#salaryCheckBtn').click(checkSalary);
     $('#salaryRiseBtn').click(riseSalary);
+    $('#salaryAvgCheckBtn').click(checkAvgSalary);
 }
 
 $( document ).ready(function() {
