@@ -23,26 +23,22 @@ public class SalaryDbService {
     }
 
     public CurrentSalaryDto getAvgSalaryOfAssistantEngineer() {
-        List<Salary> salaries = entityManager.createQuery(
-                "select s " +
+        Double averageSalary = entityManager.createQuery(
+                "select avg(s.salary) " +
                         "from salaries s " +
                         "   join s.employee e " +
                         "   join e.titles t " +
                         "where s.toDate = '9999-01-01' " +
                         "  and t.toDate = '9999-01-01' " +
                         "  and t.title = 'Assistant Engineer' ",
-                Salary.class)
-                .getResultList();
+                Double.class)
+                .getSingleResult();
 
-        if (salaries.isEmpty()) {
+        if (averageSalary == null) {
             return new CurrentSalaryDto(0);
         }
 
-        long sumOfSalaries = salaries.stream()
-                .mapToLong(Salary::getSalary)
-                .sum();
-
-        return new CurrentSalaryDto((int) (sumOfSalaries / salaries.size()));
+        return new CurrentSalaryDto(averageSalary.intValue());
     }
 
 }
