@@ -9,18 +9,34 @@
 </head>
 <body>
 
-<div>
-    <h1>Employees</h1>
-    <a id="getRecentEmployeesLink" href="#">get 10 recent employees</a>
-    <div id="getRecentEmployeesResult"></div>
+<div class="blocks-container">
+    <div class="functional-block">
+        <h2>Recent employees</h2>
+        <div class="control-line">
+            <button class="control" id="getRecentEmployeesLink">Get 10 recent employees</button>
+        </div>
+        <div class="control-line">
+            <div class="control" id="getRecentEmployeesResult"></div>
+        </div>
+        <div class="control-line">
+            <button class="control" id="countEmployeesLink">Count employees hired since 199</button>
+        </div>
+        <div class="control-line">
+            <div class="control" id="countEmployeesResult"></div>
+        </div>
+    </div>
 
-    <a id="getManagersLink" href="#">get managers</a>
-    <div id="getManagersResult"></div>
+    <div class="functional-block">
+        <h2>Managers</h2>
+        <div class="control-line">
+            <button class="control" id="getManagersLink">Get managers</button>
+        </div>
+        <div class="control-line">
+            <div class="control" id="getManagersResult"></div>
+        </div>
+    </div>
 
-    <a id="countEmployeesLink" href="#">count employees hired since 1990</a>
-    <div id="countEmployeesResult"></div>
-
-    <div>
+    <div class="functional-block">
         <h2>Group layoffs</h2>
         <div class="control-line">
             <span class="control">Title</span>
@@ -44,7 +60,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="functional-block">
         <h2>Salary history of recent employees</h2>
         <div class="control-line">
             <button class="control" id="salaryHistoryBtn">Get salary history</button>
@@ -54,7 +70,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="functional-block">
         <h2>Salary check</h2>
         <div class="control-line">
             <div class="control">Check current salary for Erez Ritzmann.</div>
@@ -67,7 +83,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="functional-block">
         <h2>Salary rise</h2>
         <div class="control-line">
             <div class="control">Salary rise for Erez Ritzmann.</div>
@@ -80,7 +96,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="functional-block">
         <h2>Average salary</h2>
         <div class="control-line">
             <div class="control">Check current average salary at Assistant Engineer position.</div>
